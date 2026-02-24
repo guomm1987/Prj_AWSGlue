@@ -1,0 +1,40 @@
+{
+  "name" : "testJob",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::648671223619:role/AWSGlueServiceRole-Default",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-648671223619-ap-southeast-2/scripts/testJob.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-648671223619-ap-southeast-2/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-648671223619-ap-southeast-2/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1771901703961\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://dxif-bucket-test/test/csvdata\"},\"Escaper\":\"\\\\\",\"Exclusions\":[],\"Multiline\":true,\"Name\":\"inputDataFromS3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"code\",\"Type\":\"string\"},{\"Name\":\"name\",\"Type\":\"string\"},{\"Name\":\"flg\",\"Type\":\"string\"}]}],\"Paths\":[\"s3://dxif-bucket-test/test/csvdata\"],\"QuoteChar\":\"quote\",\"Separator\":\"comma\",\"WithHeader\":true}},\"node-1771906263813\":{\"S3DirectTarget\":{\"AutoDataQuality\":{\"IsEnabled\":false},\"Compression\":\"none\",\"Format\":\"csv\",\"Inputs\":[\"node-1771909307109\"],\"Name\":\"Amazon S3\",\"NumberTargetPartitions\":\"0\",\"PartitionKeys\":[],\"Path\":\"s3://dxif-bucket-test/test/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}},\"node-1771909307109\":{\"SparkSQL\":{\"Inputs\":[\"node-1771901703961\"],\"Name\":\"SQL Query\",\"SqlAliases\":[{\"Alias\":\"myDataSource\",\"From\":\"node-1771901703961\"}],\"SqlQuery\":\"select * from myDataSource\\nwhere flg = '1'\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "Prj_AWSGlue",
+    "branch" : "main",
+    "folder" : "testJob"
+  }
+}
