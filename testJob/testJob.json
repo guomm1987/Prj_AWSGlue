@@ -1,6 +1,6 @@
 {
   "name" : "testJob",
-  "jobMode" : "VISUAL",
+  "jobMode" : "SCRIPT",
   "description" : "",
   "role" : "arn:aws:iam::648671223619:role/AWSGlueServiceRole-Default",
   "executionProperty" : {
@@ -30,7 +30,6 @@
   "numberOfWorkers" : 10,
   "workerType" : "G.1X",
   "executionClass" : "STANDARD",
-  "codeGenConfigurationNodes" : "{\"node-1771901703961\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://dxif-bucket-test/test/csvdata\"},\"Escaper\":\"\\\\\",\"Exclusions\":[],\"Multiline\":true,\"Name\":\"inputDataFromS3\",\"OptimizePerformance\":false,\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"code\",\"Type\":\"string\"},{\"Name\":\"name\",\"Type\":\"string\"},{\"Name\":\"flg\",\"Type\":\"string\"}]}],\"Paths\":[\"s3://dxif-bucket-test/test/csvdata\"],\"QuoteChar\":\"quote\",\"Separator\":\"comma\",\"WithHeader\":true}},\"node-1771906263813\":{\"S3DirectTarget\":{\"AutoDataQuality\":{\"IsEnabled\":false},\"Compression\":\"none\",\"Format\":\"csv\",\"Inputs\":[\"node-1771909307109\"],\"Name\":\"Amazon S3\",\"NumberTargetPartitions\":\"0\",\"PartitionKeys\":[],\"Path\":\"s3://dxif-bucket-test/test/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}},\"node-1771909307109\":{\"SparkSQL\":{\"Inputs\":[\"node-1771901703961\"],\"Name\":\"SQL Query\",\"SqlAliases\":[{\"Alias\":\"myDataSource\",\"From\":\"node-1771901703961\"}],\"SqlQuery\":\"select * from myDataSource\\nwhere flg = '1'\"}}}",
   "sourceControlDetails" : {
     "provider" : "GITHUB",
     "repository" : "Prj_AWSGlue",
